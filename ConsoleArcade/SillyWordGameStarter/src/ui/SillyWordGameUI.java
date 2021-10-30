@@ -25,22 +25,19 @@ public class SillyWordGameUI {
     //MODIFIES: this
     //EFFECTS: fills each needed word entry with user input
     private void userInteraction(){
-        //TODO: refactor this loop to use the iterator pattern you just implemented
-        while(wordGame.needMoreWords()){
-            Phrase p = wordGame.getNextPhraseNeedingWord();
+       for(Phrase p: wordGame){
+           WordEntry w = p.getNeededWordEntry();
+           printWordInputDescription(w);
 
-            WordEntry w = p.getNeededWordEntry();
-            printWordInputDescription(w);
+           String input = "";
+           while (input.length() == 0) {
+               if (s.hasNext())
+                   input = s.nextLine();
+           }
+           input = input.trim();
 
-            String input = "";
-            while (input.length() == 0) {
-                if (s.hasNext())
-                    input = s.nextLine();
-            }
-            input = input.trim();
-
-            p.fillWordEntry(input);
-        }
+           p.fillWordEntry(input);
+       }
     }
 
     //EFFECTS: prints out all phrases in this game
